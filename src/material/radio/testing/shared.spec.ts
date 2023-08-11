@@ -148,7 +148,7 @@ export function runHarnessTests(
     it('should set the default orientation to horizontal', async () => {
       const groups = await loader.getHarness(radioGroupHarness);
 
-      expect(await group.getOrientation()).toBe('horizontal');
+      expect(await groups.getOrientation()).toBe('horizontal');
     });
 
     it('should return the right orientation for horizontal', async () => {
@@ -157,7 +157,7 @@ export function runHarnessTests(
       fixture.componentInstance.orientation = 'horizontal';
       fixture.detectChanges();
 
-      expect(await group.getOrientation()).toBe('horizontal');
+      expect(await groups.getOrientation()).toBe('horizontal');
     });
 
     it('should return the right orientation for vertical', async () => {
@@ -166,7 +166,7 @@ export function runHarnessTests(
       fixture.componentInstance.orientation = 'vertical';
       fixture.detectChanges();
 
-      expect(await group.getOrientation()).toBe('vertical');
+      expect(await groups.getOrientation()).toBe('vertical');
     });
   });
 
@@ -329,5 +329,5 @@ class MultipleRadioButtonsHarnessTest {
   secondGroupId = 'my-group-2';
   thirdGroupName: string = 'third-group-name';
   thirdGroupButtonName: string | undefined = undefined;
-  orientation?: 'horizontal': 'vertical' = undefined;
+  orientation?: 'horizontal'| 'vertical' = undefined;
 }
