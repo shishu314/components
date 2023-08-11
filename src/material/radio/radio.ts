@@ -169,6 +169,9 @@ export abstract class _MatRadioGroupBase<T extends _MatRadioButtonBase>
     this._markRadiosForCheck();
   }
 
+  /** Whether the radio buttons are displayed horizontally or vertically. Defaults to 'horizontal' */
+  @Input() orientation: 'horizontal': 'vertical' = 'horizontal';
+  
   /**
    * Value for the radio-group. Should equal the value of the selected radio button if there is
    * a corresponding radio button with a matching value. If there is not such a corresponding
@@ -681,6 +684,7 @@ export abstract class _MatRadioButtonBase
  */
 @Directive({
   selector: 'mat-radio-group',
+  styleUrls: ['radio.css'],
   exportAs: 'matRadioGroup',
   providers: [
     MAT_RADIO_GROUP_CONTROL_VALUE_ACCESSOR,
@@ -689,6 +693,7 @@ export abstract class _MatRadioButtonBase
   host: {
     'role': 'radiogroup',
     'class': 'mat-mdc-radio-group',
+    '[class.is-vertical]': 'this.orietation === "horizontal"',
   },
 })
 export class MatRadioGroup extends _MatRadioGroupBase<MatRadioButton> {
