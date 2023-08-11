@@ -144,6 +144,30 @@ export function runHarnessTests(
         /Could not find radio button matching {"label":"opt4"}/,
       );
     });
+
+    it('should set the default orientation to horizontal', async () => {
+      const groups = await loader.getHarness(radioGroupHarness);
+
+      expect(await group.getOrientation()).toBe('horizontal');
+    });
+
+    it('should return the right orientation for horizontal', async () => {
+      const groups = await loader.getHarness(radioGroupHarness);
+
+      fixture.componentInstance.orientation = 'horizontal';
+      fixture.detectChanges();
+
+      expect(await group.getOrientation()).toBe('horizontal');
+    });
+
+    it('should return the right orientation for vertical', async () => {
+      const groups = await loader.getHarness(radioGroupHarness);
+
+      fixture.componentInstance.orientation = 'vertical';
+      fixture.detectChanges();
+
+      expect(await group.getOrientation()).toBe('vertical');
+    });
   });
 
   describe('MatRadioButtonHarness', () => {
@@ -277,7 +301,7 @@ export function runHarnessTests(
       Option #{{i + 1}}
     </mat-radio-button>
 
-    <mat-radio-group id="my-group-1" name="my-group-1-name">
+    <mat-radio-group id="my-group-1" name="my-group-1-name" [orientation]="orientation">
       <mat-radio-button *ngFor="let value of values"
                         [checked]="value === 'opt2'"
                         [value]="value"
@@ -287,13 +311,13 @@ export function runHarnessTests(
     </mat-radio-group>
 
 
-    <mat-radio-group [id]="secondGroupId" [name]="secondGroupId + '-name'">
+    <mat-radio-group [id]="secondGroupId" [name]="secondGroupId + '-name'" [orientation]="orientation">
       <mat-radio-button id="required-radio" required [value]="true">
         Accept terms of conditions
       </mat-radio-button>
     </mat-radio-group>
 
-    <mat-radio-group [name]="thirdGroupName">
+    <mat-radio-group [name]="thirdGroupName" [orientation]="orientation">
       <mat-radio-button [value]="true">First</mat-radio-button>
       <mat-radio-button [value]="false" [name]="thirdGroupButtonName"></mat-radio-button>
     </mat-radio-group>
@@ -305,4 +329,5 @@ class MultipleRadioButtonsHarnessTest {
   secondGroupId = 'my-group-2';
   thirdGroupName: string = 'third-group-name';
   thirdGroupButtonName: string | undefined = undefined;
+  orientation?: 'horizontal': 'vertical' = undefined;
 }
