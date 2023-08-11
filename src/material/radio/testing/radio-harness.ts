@@ -98,6 +98,10 @@ export abstract class _MatRadioGroupHarnessBase<
     return radioButtons[0].check();
   }
 
+  async getOrientation(): Promise<string> {
+    return (await (await this.host()).hasClass('is-vertical')) ? 'vertical': 'horizontal';
+  }
+
   /** Gets the name attribute of the host element. */
   private async _getGroupNameFromHost() {
     return (await this.host()).getAttribute('name');
