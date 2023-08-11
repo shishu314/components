@@ -16,6 +16,11 @@
   @include mdc-radio.static-styles($query: mdc-helpers.$mdc-base-styles-query);
   @include mdc-form-field.core-styles($query: mdc-helpers.$mdc-base-styles-query);
 
+  .mat-mdc-radio-group.is-vertical {
+    display: flex;
+    flex-direction: column;
+  }
+
   .mat-mdc-radio-button {
     @include token-utils.create-token-values(
       tokens-mat-radio.$prefix, tokens-mat-radio.get-unthemable-tokens());
